@@ -1,13 +1,13 @@
-from django.urls import path
-from . import views
-urlpatterns = [
-path('add/', views.add_student, name='add_student'),
-path('getAll/', views.get_all_students, name='get_all_students'),
-]
-11. urls.py (project: myproject)
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+
+# Une simple vue inline pour la page d'accueil
+def home(request):
+    return HttpResponse("<h1>Bienvenue sur mon site Django 🎉</h1><p>Ceci est la page d'accueil.</p>")
+
 urlpatterns = [
-path('admin/', admin.site.urls),
-path('student/', include('students.urls')), # include your app urls
+    path('admin/', admin.site.urls),
+    path('', home, name='home'),  # <-- Ajout de la page d'accueil
+    path('student/', include('students.urls')),  # Si ton app students a un fichier urls.py
 ]
